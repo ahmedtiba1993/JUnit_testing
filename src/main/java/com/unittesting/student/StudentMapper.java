@@ -13,7 +13,7 @@ public class StudentMapper {
 
         School school = new School();
         school.setId(request.SchoolId());
-        student.setSchool(school);
+        //student.setSchool(school);
 
         return student;
     }
