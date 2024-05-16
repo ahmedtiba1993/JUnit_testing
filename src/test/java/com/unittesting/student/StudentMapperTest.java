@@ -39,4 +39,15 @@ class StudentMapperTest {
         assertEquals(student.getAge(), studentResponse.getAge());
 
     }
+
+    @Test
+    public void should_map_Dto_to_student_when_dto_is_null(){
+        Student student = StudentMapper.toStudent(null);
+    }
+
+    @Test
+    public void should_throw__null_pointer_exception_when_dto_is_null(){
+        var exp = assertThrows(NullPointerException.class, ()->StudentMapper.toStudent(null));
+        assertEquals(exp.getMessage(),"request is null");
+    }
 }

@@ -5,6 +5,9 @@ import com.unittesting.school.School;
 public class StudentMapper {
 
     public static Student toStudent(StudentRequest request){
+        if(request == null){
+            throw new NullPointerException("request is null");
+        }
         Student student = new Student();
         student.setAge(request.age());
         student.setFirstName(request.firstName());
