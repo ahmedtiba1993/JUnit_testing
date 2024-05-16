@@ -3,36 +3,21 @@ package com.unittesting.student;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StudentMapperTest {
 
-    @BeforeAll
-    static void beforeAll() {
-        System.out.println("Before All");
-    }
-
-    @AfterAll
-    static void afterAll() {
-        System.out.println("After All");
-    }
-
-    @BeforeEach
-    void setUp() {
-        System.out.println("run before each method");
-    }
-
-    @AfterEach
-    void tearDown() {
-        System.out.println("run after each method");
-    }
-
     @Test
-    public void testMethod1(){
-        System.out.println("testMethod 1");
-    }
+    public void shouldMapDtoToStudent() {
+        StudentRequest dto = new StudentRequest("Ahmed", "Tibe", 30, "ahmed.tiba.1993@gmail.com",1L);
+        Student student = StudentMapper.toStudent(dto);
 
-    @Test
-    public void testMethod2(){
-        System.out.println("testMethod 2");
+        assertNotNull(student);
+        assertEquals(dto.firstName(), student.getFirstName());
+        assertEquals(dto.lastName(), student.getLastName());
+        assertEquals(dto.email(), student.getEmail());
+        assertEquals(dto.age(), student.getAge());
+        assertNotNull(student.getSchool());
+        assertEquals(dto.SchoolId(), student.getSchool().getId());
     }
 }

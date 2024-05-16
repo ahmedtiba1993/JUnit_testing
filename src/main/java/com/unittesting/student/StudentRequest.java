@@ -16,6 +16,10 @@ public record StudentRequest(
         int age,
 
         @Email
-        String email) {
+        String email,
+
+        @NotEmpty
+        Long SchoolId
+) {
 
 }

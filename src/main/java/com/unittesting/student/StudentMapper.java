@@ -1,5 +1,7 @@
 package com.unittesting.student;
 
+import com.unittesting.school.School;
+
 public class StudentMapper {
 
     public static Student toStudent(StudentRequest request){
@@ -8,6 +10,11 @@ public class StudentMapper {
         student.setFirstName(request.firstName());
         student.setLastName(request.lastName());
         student.setEmail(request.email());
+
+        School school = new School();
+        school.setId(request.SchoolId());
+        student.setSchool(school);
+
         return student;
     }
 
