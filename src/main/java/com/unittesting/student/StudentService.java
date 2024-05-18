@@ -18,6 +18,8 @@ public class StudentService {
     public StudentResponse save(StudentRequest studentRequest) {
         Student student = StudentMapper.toStudent(studentRequest);
         Student savedStudent = studentRepository.save(student);
+        // verify studentRepository was called one time with Mockito
+        //studentRepository.save(student);
         return StudentMapper.toStudentResponse(savedStudent);
     }
 

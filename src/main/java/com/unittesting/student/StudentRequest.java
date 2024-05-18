@@ -2,6 +2,7 @@ package com.unittesting.student;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record StudentRequest(
@@ -18,7 +19,7 @@ public record StudentRequest(
         @Email
         String email,
 
-        @NotEmpty
+        @NotNull
         Long SchoolId
 ) {
 
