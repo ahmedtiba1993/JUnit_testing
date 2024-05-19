@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -81,6 +83,26 @@ class StudentServiceTest {
 
         Mockito.verify(studentRepository, Mockito.times(1)).findById(studentId);
 
+    }
 
+    @Test
+    public void should_return_all_students() {
+        // Given
+        List<Student> students = new ArrayList<>();
+        Student sudent = new Student();
+        sudent.setFirstName("Ahmed");
+        sudent.setLastName("Tiba");
+        sudent.setEmail("ahmed.tiba.1993@gmail.com");
+        students.add(sudent);
+
+        // Mock the calls
+        Mockito.when(studentRepository.findAll()).thenReturn(students);
+
+        // When
+        List<StudentResponse> dtos = studentService.getAllStudents();
+
+        // Then
+        assertNotNull(dtos);
+        assertEquals(dtos.size(), students.size());
     }
 }
