@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentServiceTest {
@@ -53,5 +55,32 @@ class StudentServiceTest {
 
         // verify studentRepository was called one time
         Mockito.verify(studentRepository, Mockito.times(1)).save(Mockito.any(Student.class));
+    }
+
+    @Test
+    public void sould_student_return_by_id(){
+        // Given
+        Long studentId = 1L;
+
+        Student student = new Student();
+        student.setFirstName("Ahmed");
+        student.setLastName("Tiba");
+        student.setEmail("ahmed.tiba.1993@gmail.com");
+
+        // Mock the calls
+        Mockito.when(studentRepository.findById(studentId)).thenReturn(Optional.of(student));
+
+        // When
+        StudentResponse dto = studentService.getStudentById(studentId);
+
+        // Then
+        assertNotNull(dto);
+        assertEquals(dto.getFirstName(), student.getFirstName());
+        assertEquals(dto.getLastName(), student.getLastName());
+        assertEquals(dto.getEmail(), student.getEmail());
+
+        Mockito.verify(studentRepository, Mockito.times(1)).findById(studentId);
+
+
     }
 }
