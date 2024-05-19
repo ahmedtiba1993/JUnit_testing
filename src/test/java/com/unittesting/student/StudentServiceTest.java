@@ -105,4 +105,22 @@ class StudentServiceTest {
         assertNotNull(dtos);
         assertEquals(dtos.size(), students.size());
     }
+
+    @Test
+    public void should_return_student_by_name() {
+        String firstName = "Ahmed";
+        Student student = new Student();
+        //student.setFirstName("Ahmeda"); // Error
+        student.setFirstName("Ahmed"); // correct
+        student.setLastName("Tiba");
+        student.setEmail("ahmed.tiba.1993@gmail.com");
+
+        Mockito.when(studentRepository.findByName(firstName)).thenReturn(Optional.of(student));
+
+        StudentResponse dto = studentService.getStudentByName(firstName);
+        assertNotNull(dto);
+        assertEquals(dto.getFirstName(), firstName);
+    }
+
+
 }

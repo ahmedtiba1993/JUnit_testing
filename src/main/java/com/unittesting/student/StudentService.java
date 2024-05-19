@@ -36,4 +36,13 @@ public class StudentService {
             return null;
         }
     }
+
+    public StudentResponse getStudentByName(String name) {
+        Optional<Student> student = studentRepository.findByName(name);
+        if (student.isPresent()) {
+            return StudentMapper.toStudentResponse(student.get());
+        }else{
+            return null;
+        }
+    }
 }
